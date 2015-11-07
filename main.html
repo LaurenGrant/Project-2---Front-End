@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>Project 2</title>
+      <style type="text/css"></style>
+      <link rel="stylesheet" type="text/css" href="css/main.css">
+      </head>
+    <body>
+      <div class="user-records">
+        <form id="register">
+          <input name="email" type="text" placeholder="email">
+          <input name="password" type="password" placeholder="password">
+          <input name="password_confirmation" type="password" placeholder="password confirmation">
+          <input name="register" type="submit" value="Register">
+        </form>
+        <form id="login">
+          <input name="email" type="text" placeholder="email">
+          <input name="password" type="password" placeholder="password">
+          <input name="login" type="submit" value="Login">
+        </form>
+        <form id="create-event">
+          <input name="create-event" type="submit" value="Create Event">
+          <input class="token" name="token" type="hidden">
+        </form>
+        <form id="show-event">
+          <label for="event-id">Event ID:</label>
+          <input id="event-id" type="text" size="4">
+          <input name="show-event" type="submit" value="Show Event">
+          <input class="token" name="token" type="hidden">
+          </form>
+          <label for="result">Result</label>
+          <textarea id="result"></textarea>
+          <input type="hidden" id="gameId" />
+        </div>
+    </body>
+  </html>
