@@ -1,10 +1,11 @@
 'use strict';
-
-// var id = user.id;
-
-// var token = user.token;
+var user = {
+  id: null,
+  token: null
+};
 
 var api = {
+
   url: 'http://localhost:3000',
 
   ajax: function(config, cb) {
@@ -88,6 +89,9 @@ $(function() {
         return;
       }
       callback(null, data);
+      user.id = data.user.id; // stores value of user.id
+      user.token = data.user.token; // stores value of user.token
+      console.log(user);
       $('.token').val(data.user.token);
     };
     e.preventDefault();
@@ -95,8 +99,9 @@ $(function() {
   });
 
   $('#logout').on('submit', function(e) {
-    var token = $('.token').val;
-    var id = data.id;
+    var token = $('.token').val();
+     // user.token;
+    var id = user.id;
     e.preventDefault();
     api.logout(id, token, callback);
   });
