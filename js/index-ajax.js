@@ -30,6 +30,17 @@ var api = {
       dataType: 'json'
     }, callback);
   },
+
+  logout: function logout(id, token, callback) {
+    this.ajax({
+      method: 'DELETE',
+      url: this.url + '/logout/' + id,
+      headers: {
+        Authorization:'Token token=' + token
+      },
+      dataType: 'json'
+    }, callback);
+  },
 };
 // $(document).ready(...
 $(function() {
@@ -79,5 +90,23 @@ $(function() {
     api.login(credentials, cb);
   });
 
-
 });
+
+$('#logout').on('submit', function(e) {
+  var deleteToken =
+
+  .removeItem('token'
+}
+
+
+## Logout
+
+
+
+
+
+```
+curl --request DELETE --header "Authorization: Token token=c017d611187e3350baffc52d35a4df69" http://localhost:3000/logout/1
+```
+
+# Users
