@@ -1,5 +1,9 @@
 'use strict';
 
+// var id = user.id;
+
+// var token = user.token;
+
 var api = {
   url: 'http://localhost:3000',
 
@@ -90,23 +94,14 @@ $(function() {
     api.login(credentials, cb);
   });
 
+  $('#logout').on('submit', function(e) {
+    var token = $('.token').val;
+    var id = data.id;
+    e.preventDefault();
+    api.logout(id, token, callback);
+  });
+
+
 });
 
-$('#logout').on('submit', function(e) {
-  var deleteToken =
 
-  .removeItem('token'
-}
-
-
-## Logout
-
-
-
-
-
-```
-curl --request DELETE --header "Authorization: Token token=c017d611187e3350baffc52d35a4df69" http://localhost:3000/logout/1
-```
-
-# Users
