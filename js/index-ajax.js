@@ -49,16 +49,16 @@ var api = {
 
 
 //Authenticated api actions
-  // listEvents: function list(token, callback) {
-  //   this.ajax({
-  //     method: 'GET',
-  //     url: this.url + '/events',
-  //     headers: {
-  //       Authorization: 'Token token=' + token
-  //     },
-  //     dataType: 'json'
-  //   }, callback);
-  // },
+  listEvents: function list(event, token, callback) {
+    this.ajax({
+      method: 'GET',
+      url: this.url + '/events',
+      headers: {
+        Authorization: 'Token token=' + token
+      },
+      dataType: 'json'
+    }, callback);
+  },
 
   createEvent: function create(event, token, callback) {
     this.ajax({
@@ -144,12 +144,12 @@ $(function() {
     api.logout(id, token, callback);
   });
 
-// I think complete??
-// $('#list-events').on('submit', function(e) {
-//     var token = $(this).children('[name="token"]').val();
-//     e.preventDefault();
-//     api.listevents(token, callback);
-//   });
+$('#list-events').on('submit', function(e) {
+    var token = $('.token').val();
+    // var id = event.id;
+    e.preventDefault();
+    api.listEvents(event, token, callback);
+  });
 
   var createEventCB = function createEventCB(err, data) {
     if(err) {
