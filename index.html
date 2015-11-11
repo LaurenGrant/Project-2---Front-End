@@ -28,10 +28,6 @@
           <input name="list-events" type="submit" value="List Events">
           <input class="token" name="token" type="hidden">
         </form>
-        <form id="create-event">
-          <input name="create-event" type="submit" value="Create Event">
-          <input class="token" name="token" type="hidden">
-        </form>
         <form id="show-event">
           <label for="show-id">Id:</label>
           <input id="show-id" type="text" size="4">
@@ -58,6 +54,33 @@
       <hr class="section-heading-spacer">
       <h2>Sample Text Here<br>Line Break Here</h2>
       <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+      <form id="create-event">
+        <select name="business_kind" id="business_kind">
+            <option value="bar">Bar</option>
+            <option value="club">Club</option>
+            <option value="dinner">Dinner</option>
+            <option value="music_venue">Music Venue</option>
+            <option value="resturant">Resturant</option>
+            <option value="spa">Spa</option>
+            <option value="vinyard">Vinyard</option>
+            <option value="other">Other</option>
+        </select>
+        <input name="name" type="text" placeholder="Name" id="name">
+        <input class="token" name="token" type="hidden">
+        <input name="website" type="text" placeholder="Website" id="website">
+        <input name="phone_number" type="text" placeholder="Phone Number" id="phone_number">
+        <input class="token" name="token" type="hidden">
+        <input name="event_date" type="text" placeholder="Date of Event" id="event_date">
+        <input class="token" name="token" type="hidden">
+        <input name="group_size" type="text" placeholder="Party Size" id="group_size">
+        <input class="token" name="token" type="hidden">
+        <input name="location_id" type="text" placeholder="location id" id="location_id">
+        <input class="token" name="token" type="hidden">
+        <input name="user_id" type="text" placeholder="user id" id="user_id">
+        <input class="token" name="token" type="hidden">
+        <input name="Submit" class="form-control" type="submit" value="Submit">
+        <input class="token" name="token" type="hidden">
+      </form>
     </div>
   </div>
 <!-- Hero close -->
@@ -83,5 +106,5 @@
   <script type="text/javascript" src="vendor/js/jquery-2.1.4.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
   <script type="text/javascript" src="js/index-ajax.js"></script>
-
 </html>
+
