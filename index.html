@@ -43,17 +43,15 @@
         <form id="logout">
           <input name="logout" type="submit" value="Log Out">
         </form>
-        <br>
-        <label for="result">Result</label>
-        <textarea id="result"></textarea>
+      </div>
     </div>
-  </div>
 <!-- Section -->
   <div class="section-1">
     <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
       <hr class="section-heading-spacer">
-      <h2>Sample Text Here<br>Line Break Here</h2>
+      <h2>Create your next event!<br>Line Break Here</h2>
       <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+  <!--- Create Event Form -->
       <form id="create-event">
         <select name="business_kind" id="business_kind">
             <option value="bar">Bar</option>
@@ -70,7 +68,7 @@
         <input name="website" type="text" placeholder="Website" id="website">
         <input name="phone_number" type="text" placeholder="Phone Number" id="phone_number">
         <input class="token" name="token" type="hidden">
-        <input name="event_date" type="text" placeholder="Date of Event" id="event_date">
+        <input name="event_date" type="text" placeholder="Date of Event (YYYY-mm-dd)" id="event_date">
         <input class="token" name="token" type="hidden">
         <input name="group_size" type="text" placeholder="Party Size" id="group_size">
         <input class="token" name="token" type="hidden">
@@ -81,6 +79,8 @@
         <input name="Submit" class="form-control" type="submit" value="Submit">
         <input class="token" name="token" type="hidden">
       </form>
+              <label for="result">Result</label>
+        <textarea id="result"></textarea>
     </div>
   </div>
 <!-- Hero close -->
