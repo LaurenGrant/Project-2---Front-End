@@ -1,11 +1,41 @@
 'use strict';
 
 
-$("#section-1-show").click(function() {
-  $("#login").hide();
+$('#section-1-show').click(function() {
+  $('#login').hide();
   $('#section-1').show();
   $('#register').hide()
+  $('#intro-message').hide()
 });
+
+$('#logout-show').click(function() {
+  $('#register').show();
+  $('#login').show();
+  $('#section-1').hide()
+  $('#intro-message').show()
+});
+
+$('#new-event').click(function() {
+  $('#enter-location').show();
+  $('#create-location').show();
+  $('#create-or-update').hide()
+  $('#option1').hide()
+  $('#option2').hide()
+});
+
+$('#update-an-event').click(function() {
+  $('#enter-event').hide();
+  $('#edit-event').show();
+  $('#create-or-update').hide()
+  $('#option1').hide()
+  $('#option2').hide()
+});
+
+$('#promt-event-form').click(function() {
+  $('#enter-event').show();
+  $('#create-event').show();
+});
+
 
 
 var user = {
