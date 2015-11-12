@@ -34,10 +34,35 @@
           <input name="show-event" type="submit" value="Show Event">
           <input class="token" name="token" type="hidden">
         </form>
-        <form id="join-game">
-          <label for="join-id">Id:</label>
-          <input id="join-id" type="text" size="4">
-          <input name="join-game" type="submit" value="Join Game">
+<!--- Edit Event Form -->
+        <form id="edit-event">
+          <label for="edit-event">Enter Event ID</label>
+          <input id="event-id" type="text" size="4">
+          <select name="business_kind" id="business_kind">
+            <option value="bar">Bar</option>
+            <option value="club">Club</option>
+            <option value="music_venue">Music Venue</option>
+            <option value="resturant">Resturant</option>
+            <option value="spa">Spa</option>
+            <option value="vinyard">Vinyard</option>
+            <option value="other">Other</option>
+        </select>
+          <input name="name" type="text" placeholder="Name" id="name">
+          <input class="token" name="token" type="hidden">
+          <input name="website" type="text" placeholder="Website" id="website">
+          <input name="phone_number" type="text" placeholder="Phone Number" id="phone_number">
+          <input class="token" name="token" type="hidden">
+          <input name="event_date" type="text" placeholder="Date of Event (YYYY-mm-dd)" id="event_date">
+          <input class="token" name="token" type="hidden">
+          <input name="group_size" type="text" placeholder="Party Size" id="group_size">
+          <input class="token" name="token" type="hidden">
+          <input name="location_id" type="text" placeholder="location id" id="location_id">
+          <input class="token" name="token" type="hidden">
+          <input name="user_id" type="text" placeholder="user id" id="user_id">
+          <input class="token" name="token" type="hidden">
+          <input name="Submit" class="form-control" type="submit" value="Submit">
+          <input class="token" name="token" type="hidden">
+          <input name="edit-event" type="submit" value="Edit Event">
           <input class="token" name="token" type="hidden">
         </form>
         <form id="logout">
@@ -56,7 +81,6 @@
         <select name="business_kind" id="business_kind">
             <option value="bar">Bar</option>
             <option value="club">Club</option>
-            <option value="dinner">Dinner</option>
             <option value="music_venue">Music Venue</option>
             <option value="resturant">Resturant</option>
             <option value="spa">Spa</option>

@@ -73,7 +73,21 @@ var api = {
     }, callback);
   },
 
-};
+  // Not working yet. Does not save in db
+
+  editEvent: function (event, token, callback) {
+    this.ajax({
+      method: 'PATCH',
+      url: this.url + '/events/' + id,
+      headers: {
+        Authorization: 'Token token=' + token
+      },
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({}),
+      dataType: 'json'
+    }, callback);
+  },
+
   // showEvent: function show(id, token, callback) {
   //   this.ajax({
   //     method: 'GET',
@@ -84,6 +98,9 @@ var api = {
   //     dataType: 'json'
   //   }, callback);
   // },
+
+};
+
 
 // $(document).ready(...
 $(function() {
@@ -151,6 +168,13 @@ $('#list-events').on('submit', function(e) {
     api.listEvents(event, token, callback);
   });
 
+// $('#show-event').on('submit', function(e) {
+//     var token = $('.token').val();
+//     var id = $('#show-id').val();
+//     e.preventDefault();
+//     api.showEvent(event, token, callback);
+//   });
+
   var createEventCB = function createEventCB(err, data) {
     if(err) {
       callback(err);
@@ -160,6 +184,36 @@ $('#list-events').on('submit', function(e) {
     $('#eventId').val(data.event.id);
     callback(null, data);
   };
+
+  var listEventCB = function listEventCB(err, data) {
+    if(err) {
+      callback(err);
+      return;
+    }
+
+    $('#eventId').val(data.event.id);
+    callback(null, data);
+  };
+
+  var editEventCB = function editEventCB(err, data) {
+    if(err) {
+      callback(err);
+      return;
+    }
+
+    $('#eventId').val(data.event.id);
+    callback(null, data);
+  };
+
+  // var showLastEventCB = function showLastEventCB(err, data) {
+  //   if(err) {
+  //     callback(err);
+  //     return;
+  //   }
+
+  //   $('#eventId').val(data.event.id.last);
+  //   callback(null, data);
+  // };
 
   $('#create-event').on('submit', function(e) {
     var event = {
@@ -181,21 +235,45 @@ $('#list-events').on('submit', function(e) {
 
     });
 
+  // Not working yet. Does not save in db
+
+  $('#edit-event').on('submit', function(e) {
+    var eventData = {"event":
+      {
+        // event: {
+        id: $('#event-id').val(),
+        business_kind: $('#business_kind').val(),
+        name: $('#name').val(),
+        website: $('#website').val(),
+        phone_number: $('#phone_number').val(),
+        event_date: $('#event_date').val(),
+        group_size: $('#group_size').val(),
+        location_id: $('#location_id').val()
+       // user_id: $('#user_id').val()
+      }
+    }
+    // }
+    var token = $('.token').val();
+    e.preventDefault();
+
+    $.ajax({
+      method: 'PATCH',
+      url: api.url + '/events/' + eventData.event.id,
+      headers: {
+        Authorization: 'Token token=' + token
+      },
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify(eventData),
+      dataType: 'json'
+    })
+    .done(function(){
+      console.log('updated this event!');
     });
-  // $('#show-event').on('submit', function(e) {
-  //   var token = $(this).children('[name="token"]').val();
-  //   var id = $('#show-id').val();
-  //   e.preventDefault();
-  //   api.showEvent(id, token, callback);
-  // });
+    //api.editEvent(event, token, editEventCB);
+  });
+
+});
+
 // End of what I think works now.
 
 // });
-
-
-
-
-
-
-
-
