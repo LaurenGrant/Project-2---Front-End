@@ -1,4 +1,13 @@
 'use strict';
+
+
+$("#section-1-show").click(function() {
+  $("#login").hide();
+  $('#section-1').show();
+  $('#register').hide()
+});
+
+
 var user = {
   id: null,
   token: null
@@ -73,7 +82,18 @@ var api = {
     }, callback);
   },
 
-  // Not working yet. Does not save in db
+  createLocation: function create(location, token, callback) {
+    this.ajax({
+      method: 'POST',
+      url: this.url + '/locations/',
+      headers: {
+        Authorization: 'Token token=' + token
+      },
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({event}),
+      dataType: 'json',
+    }, callback);
+  },
 
   editEvent: function (event, token, callback) {
     this.ajax({
@@ -88,7 +108,7 @@ var api = {
     }, callback);
   },
 
-  // showEvent: function show(id, token, callback) {
+  // showEvent: function show(event, token, callback) {
   //   this.ajax({
   //     method: 'GET',
   //     url: this.url + '/events/' + id,
@@ -163,17 +183,20 @@ $(function() {
 
 $('#list-events').on('submit', function(e) {
     var token = $('.token').val();
-    // var id = event.id;
     e.preventDefault();
     api.listEvents(event, token, callback);
   });
 
 // $('#show-event').on('submit', function(e) {
+//     var eventData = {"event":
+//       {
+//         id: $('#show-eventId').val()
+//       }
+//     }
 //     var token = $('.token').val();
-//     var id = $('#show-id').val();
 //     e.preventDefault();
-//     api.showEvent(event, token, callback);
-//   });
+    // api.showEvent(event, token, callback);
+  // });
 
   var createEventCB = function createEventCB(err, data) {
     if(err) {
@@ -185,12 +208,21 @@ $('#list-events').on('submit', function(e) {
     callback(null, data);
   };
 
-  var listEventCB = function listEventCB(err, data) {
+  var createLocationCB = function createLocationCB(err, data) {
     if(err) {
       callback(err);
       return;
     }
 
+    $('#locationId').val(data.location.id);
+    callback(null, data);
+  };
+
+  var listEventCB = function listEventCB(err, data) {
+    if(err) {
+      callback(err);
+      return;
+    }
     $('#eventId').val(data.event.id);
     callback(null, data);
   };
@@ -200,24 +232,22 @@ $('#list-events').on('submit', function(e) {
       callback(err);
       return;
     }
-
     $('#eventId').val(data.event.id);
     callback(null, data);
   };
 
-  // var showLastEventCB = function showLastEventCB(err, data) {
+  // var showEventCB = function showEventCB(err, data) {
   //   if(err) {
   //     callback(err);
   //     return;
   //   }
 
-  //   $('#eventId').val(data.event.id.last);
+  //   $('#show-eventId').val(data.event.id);
   //   callback(null, data);
   // };
 
   $('#create-event').on('submit', function(e) {
     var event = {
-      // event: {
       business_kind: $('#business_kind').val(),
       name: $('#name').val(),
       website: $('#website').val(),
@@ -227,7 +257,6 @@ $('#list-events').on('submit', function(e) {
       location_id: $('#location_id').val(),
       user_id: $('#user_id').val()
       }
-    // }
     var token = $('.token').val();
     var id = event.id;
     e.preventDefault();
@@ -235,26 +264,35 @@ $('#list-events').on('submit', function(e) {
 
     });
 
-  // Not working yet. Does not save in db
+  $('#create-location').on('submit', function(e) {
+    var location = {
+      city: $('#city').val(),
+      state: $('#state').val(),
+      region: $('#region').val()
+      }
+    var token = $('.token').val();
+    var id = location.id;
+    e.preventDefault();
+    api.createLocation(location, token, createLocationCB);
+
+    });
 
   $('#edit-event').on('submit', function(e) {
     var eventData = {"event":
       {
-        // event: {
         id: $('#event-id').val(),
-        business_kind: $('#business_kind').val(),
-        name: $('#name').val(),
-        website: $('#website').val(),
-        phone_number: $('#phone_number').val(),
-        event_date: $('#event_date').val(),
-        group_size: $('#group_size').val(),
-        location_id: $('#location_id').val()
-       // user_id: $('#user_id').val()
+        business_kind: $('#edit_business_kind').val(),
+        name: $('#edit_name').val(),
+        website: $('#edit_website').val(),
+        phone_number: $('#edit_phone_number').val(),
+        event_date: $('#edit_event_date').val(),
+        group_size: $('#edit_group_size').val(),
+        location_id: $('#edit_location_id').val()
       }
     }
-    // }
     var token = $('.token').val();
     e.preventDefault();
+    editEventCB();
 
     $.ajax({
       method: 'PATCH',
@@ -267,13 +305,9 @@ $('#list-events').on('submit', function(e) {
       dataType: 'json'
     })
     .done(function(){
-      console.log('updated this event!');
+    console.log('updated this event!');
     });
-    //api.editEvent(event, token, editEventCB);
+    // api.editEvent(event, token, editEventCB);
   });
 
 });
-
-// End of what I think works now.
-
-// });

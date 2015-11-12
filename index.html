@@ -22,11 +22,7 @@
         <form id="login">
           <input name="email" type="text" class="form-control" placeholder="email">
           <input name="password" type="password" class="form-control" placeholder="password">
-          <input name="login" type="submit" class="form-control btn btn-login" value="Login">
-        </form>
-        <form id="list-events">
-          <input name="list-events" type="submit" value="List Events">
-          <input class="token" name="token" type="hidden">
+          <input id="section-1-show" name="login" type="submit" class="form-control btn btn-login" value="Login">
         </form>
         <form id="show-event">
           <label for="show-id">Id:</label>
@@ -38,7 +34,7 @@
           <input name="logout" type="submit" value="Log Out">
         </form>
 <!-- Section -->
-  <div class="section-1">
+  <div id="section-1" class="section-1">
     <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
       <hr class="section-heading-spacer">
       <h2>Create your next event!<br>Line Break Here</h2>
@@ -107,6 +103,10 @@
           <input name="group_size" type="text" placeholder="Party Size" id="edit_group_size">
           <input class="token" name="token" type="hidden">
           <input name="edit-event" type="submit" value="Edit Event">
+          <input class="token" name="token" type="hidden">
+        </form>
+        <form id="list-events">
+          <input name="list-events" type="submit" value="List Events">
           <input class="token" name="token" type="hidden">
         </form>
         <label for="result">Result</label>

@@ -1,5 +1,14 @@
 'use strict';
 
+/*---- Hide and Show ---- */
+
+$("#section-1-show").click(function() {
+  $("#login").hide();
+  $('#section-1').show();
+  $('#register').hide()
+});
+
+/*---- Helper Functions ---- */
 // $(document).ready(...
 $(function() {
   var form2object = function(form) {
@@ -27,8 +36,6 @@ $(function() {
     }
     $('#result').val(JSON.stringify(data, null, 4));
   };
-
-
 
 /*---- Click Handlers for Register/Login/Logout ---- */
 
