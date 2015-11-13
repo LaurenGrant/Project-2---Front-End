@@ -113,19 +113,18 @@ var api = {
   },
 
 
-  // editEvent: function (event, token, callback) {
-  //   this.ajax({
-  //     method: 'PATCH',
-  //     url: this.url + '/events/' + id,
-  //     headers: {
-  //       Authorization: 'Token token=' + token
-  //     },
-  //     contentType: 'application/json; charset=utf-8',
-  //     data: JSON.stringify({}),
-  //     dataType: 'json'
-  //   }, callback);
-  // },
-
+  editEvent: function (event, token, callback) {
+    this.ajax({
+      method: 'PATCH',
+      url: this.url + '/events/' + id,
+      headers: {
+        Authorization: 'Token token=' + token
+      },
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({}),
+      dataType: 'json'
+    }, callback);
+  },
 
 };
 
@@ -220,8 +219,9 @@ $('#create-event').on('submit', function(e) {
 });
 
   $('#edit-event').on('submit', function(e) {
-    var event = {"event":
+    var eventData = {"event":
       {
+        // event: {
         id: $('#event-id').val(),
         business_kind: $('#edit_business_kind').val(),
         name: $('#edit_name').val(),
@@ -230,13 +230,12 @@ $('#create-event').on('submit', function(e) {
         event_date: $('#edit_event_date').val(),
         group_size: $('#edit_group_size').val(),
         location_id: $('#edit_location_id').val()
+       // user_id: $('#user_id').val()
       }
     }
-
+    // }
     var token = $('.token').val();
-    $('#event-store').val(event);
     e.preventDefault();
-    editEventCB();
 
     $.ajax({
       method: 'PATCH',
@@ -249,8 +248,10 @@ $('#create-event').on('submit', function(e) {
       dataType: 'json'
     })
     .done(function(){
-    console.log('updated this event!');
+      console.log('updated this event!');
     });
+    //api.editEvent(event, token, editEventCB);
+  });
   });
 
 /*---- Callback Functions ---- */
@@ -279,9 +280,10 @@ $('#create-event').on('submit', function(e) {
       callback(err);
       return;
     }
-    console.log(data);
+
     $('#eventId').val(data.event.id);
     callback(null, data);
   };
 
-});
+
+// });
