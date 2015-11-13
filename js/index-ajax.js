@@ -38,8 +38,6 @@ $('#promt-event-form').click(function() {
   $('#create-event').show();
 });
 
-
-
 var user = {
   id: null,
   token: null
@@ -47,7 +45,7 @@ var user = {
 
 var api = {
 
-  url: 'http://localhost:3000',
+  url: 'https://glacial-savannah-3353.herokuapp.com/',
 
   ajax: function(config, cb) {
     $.ajax(config).done(function(data, textStatus, jqxhr) {
