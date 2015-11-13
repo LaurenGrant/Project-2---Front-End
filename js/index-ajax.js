@@ -107,7 +107,7 @@ var api = {
         Authorization: 'Token token=' + token
       },
       contentType: 'application/json; charset=utf-8',
-      data: event,
+      data: JSON.stringify(event),
       dataType: 'json',
     }, callback);
   },
@@ -200,8 +200,9 @@ $('#list-events').on('submit', function(e) {
     api.listEvents(event, token, callback);
   });
 
-  $('#create-event').on('submit', function(e) {
-    var event = {
+$('#create-event').on('submit', function(e) {
+  var event = {
+    event: {
       business_kind: $('#business_kind').val(),
       name: $('#name').val(),
       website: $('#website').val(),
@@ -210,14 +211,13 @@ $('#list-events').on('submit', function(e) {
       group_size: $('#group_size').val(),
       location_id: $('#location_id').val(),
       user_id: $('#user_id').val()
-      }
-    var token = $('.token').val();
-    var id = event.id;
-    $('#event-store').val(event);
-    e.preventDefault();
-    api.createEvent(event, token, createEventCB);
+    }
+  };
 
-    });
+  var token = $('.token').val();
+  e.preventDefault();
+  api.createEvent(event, token, createEventCB);
+});
 
   $('#edit-event').on('submit', function(e) {
     var event = {"event":
@@ -232,6 +232,7 @@ $('#list-events').on('submit', function(e) {
         location_id: $('#edit_location_id').val()
       }
     }
+
     var token = $('.token').val();
     $('#event-store').val(event);
     e.preventDefault();
@@ -244,7 +245,7 @@ $('#list-events').on('submit', function(e) {
         Authorization: 'Token token=' + token
       },
       contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({eventData}),
+      data: JSON.stringify(eventData),
       dataType: 'json'
     })
     .done(function(){
