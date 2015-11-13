@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Great Events</title>
+      <link rel="stylesheet" type="text/css" href="css/index.css">
+   </head>
+   <body>
+   <!--Stores Data for Event-->
+   <div id="event-store"></div>
+      <!--Landing Page-->
+      <div class="hero">
+      <div class="col-lg-12">
+      <form id="logout">
+         <input id="logout-show" class="form-field btn btn-logout" name="logout" type="submit" value="Log Out">
+      </form>
+      <div id="intro-message" class="intro-message">
+         <h1>Record Your Great Events!</h1>
+         <hr class="line-break">
+         <form id="register">
+            <input class="form-field" name="email" type="text" placeholder="email">
+            <input class="form-field" name="password" type="password" placeholder="password">
+            <input class="form-field" name="password_confirmation" type="password" placeholder="confirm password">
+            <input name="register" type="submit" class="form-field btn btn-register" value="Register">
+         </form>
+         <h3>Or</h3>
+         <form id="login">
+            <input name="email" type="text" class="form-field" placeholder="email">
+            <input name="password" type="password" class="form-field" placeholder="password">
+            <input id="login-to-profile" name="login" type="submit" class="form-field btn btn-register" value="Login">
+         </form>
+      </div>
+      <!-- Section -->
+      <div id="section-1" class="section-1">
+         <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+            <hr class="section-heading-spacer">
+            <h2 id="option1">Would you like to create, update, or delete an event?<br></h2>
+            <h2 id="option2">Or would you like to view all your events?<br></h2>
+            <div id="create-or-update">
+               <button id="new-event" class="form-field btn btn-register">Create New Event</button>
+               <button id="update-an-event" class="form-field btn btn-register">Update Existing Event</button>
+               <!-- <button id="delete-an-event" class="form-field btn btn-register">Delete Existing Event</button> -->
+               <form id="list-events">
+                  <input name="list-events" class="form-field btn btn-register" type="submit" value="View All My Events">
+                  <input class="token" name="token" type="hidden">
+               </form>
+            </div>
+
+            <!--- Create Location Form -->
+            <!-- <h2 id="enter-location">Please enter in the location of your event</h2>
+            <form id="create-location">
+               <input class="form-field" name="city" type="text" placeholder="City" id="city">
+               <input class="form-field" name="state" type="text" placeholder="State (i.e. NY)" id="state">
+               <select class="form-field" name="region" id="region">
+                  <option class="form-field" value="midwest">Midwest</option>
+                  <option class="form-field" value="north_east">North East</option>
+                  <option class="form-field" value="south">South</option>
+                  <option class="form-field" value="south_west">South West</option>
+                  <option class="form-field" value="west">West</option>
+                  <option class="form-field" value="other">Other</option>
+               </select>
+               <input class="token" name="token" type="hidden">
+               <input id="promt-event-form" name="Submit" class="form-field btn btn-register" type="submit" value="Submit">
+               <input class="token" name="token" type="hidden">
+            </form> -->
+            <!--- Create Event Form -->
+            <h2 id="enter-event">Please enter in the details of your event</h2>
+            <form id="create-event">
+               <select class="form-field" name="business_kind" id="business_kind">
+                  <option class="form-field" class="form-field" value="bar" class="form-field">Bar</option>
+                  <option class="form-field" class="form-field" value="club">Club</option>
+                  <option class="form-field" class="form-field" value="music_venue">Music Venue</option>
+                  <option class="form-field" class="form-field" value="resturant">Resturant</option>
+                  <option class="form-field" class="form-field" value="spa">Spa</option>
+                  <option class="form-field" class="form-field" value="vinyard">Vinyard</option>
+                  <option class="form-field" class="form-field" value="other">Other</option>
+               </select>
+               <input class="form-field" name="name" type="text" placeholder="Name" id="name">
+               <input class="token" name="token" type="hidden">
+               <input class="form-field" name="website" type="text" placeholder="Website" id="website">
+               <input class="form-field" name="phone_number" type="text" placeholder="Phone Number" id="phone_number">
+               <input class="token" name="token" type="hidden">
+               <input class="form-field" name="event_date" type="text" placeholder="Date of Event (YYYY-mm-dd)" id="event_date">
+               <input class="token" name="token" type="hidden">
+               <input class="form-field" name="group_size" type="text" placeholder="Party Size" id="group_size">
+               <input class="token" name="token" type="hidden">
+               <input name="Submit" class="form-field btn btn-register" type="submit" value="Create Event">
+               <input class="token" name="token" type="hidden">
+            </form>
+            <!--- Edit Event Form -->
+            <form id="edit-event">
+               <label class="text-field" for="edit-event">Enter Event ID</label>
+               <input id="event-id" type="text" size="4">
+               <select class="form-field" name="edit_business_kind" id="business_kind">
+                  <option class="form-field" value="bar">Bar</option>
+                  <option class="form-field" value="club">Club</option>
+                  <option class="form-field" value="music_venue">Music Venue</option>
+                  <option class="form-field" value="resturant">Resturant</option>
+                  <option class="form-field" value="spa">Spa</option>
+                  <option class="form-field" value="vinyard">Vinyard</option>
+                  <option class="form-field" value="other">Other</option>
+               </select>
+               <input class="form-field" class="form-field" name="name" type="text" placeholder="Name" id="edit_name">
+               <input class="token" name="token" type="hidden">
+               <input class="form-field" class="form-field" name="website" type="text" placeholder="Website" id="edit_website">
+               <input class="form-field" class="form-field" name="phone_number" type="text" placeholder="Phone Number" id="edit_phone_number">
+               <input class="token" name="token" type="hidden">
+               <input class="form-field" class="form-field" name="event_date" type="text" placeholder="Date of Event (YYYY-mm-dd)" id="edit_event_date">
+               <input class="token" name="token" type="hidden">
+               <input class="form-field" class="form-field" name="group_size" type="text" placeholder="Party Size" id="edit_group_size">
+               <input class="token" name="token" type="hidden">
+               <input name="edit-event" type="submit" class="form-field btn btn-register" value="Edit Event">
+               <input class="token" name="token" type="hidden">
+            </form>
+            <label class="text-field" for="result">Result</label>
+            <textarea class="form-field" id="result"></textarea>
+         </div>
+      </div>
+      <footer>
+         <div class="col-lg-12">
+            <ul>
+               <li>&sdot;</li>
+               <li>Creatd by Lauren Grant</li>
+               <li>&sdot;</li>
+               <li>
+                  <a href="https://github.com/LaurenGrant">Github</a>
+               </li>
+               <li>&sdot;</li>
+               <li>
+                  <a href="https://www.linkedin.com/in/laurendgrant">LinkedIn</a>
+               </li>
+            </ul>
+         </div>
+      </footer>
+   </body>
+   <script type="text/javascript" src="vendor/js/jquery-2.1.4.js"></script>
+   <!--<script type="text/javascript" src="js/index.js"></script>-->
+   <script type="text/javascript" src="js/index-ajax.js"></script>
+</html>
