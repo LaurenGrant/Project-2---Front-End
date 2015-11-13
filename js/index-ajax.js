@@ -19,6 +19,7 @@ $('#logout-show').click(function() {
 $('#new-event').click(function() {
   $('#enter-location').show();
   $('#create-event').show();
+  $('#edit-event').hide()
   $('#option1').hide()
   $('#option2').hide()
 });
@@ -26,9 +27,10 @@ $('#new-event').click(function() {
 $('#update-an-event').click(function() {
   $('#enter-event').hide();
   $('#edit-event').show();
-  $('#create-or-update').hide()
+  $('#create-or-update').show()
   $('#option1').hide()
   $('#option2').hide()
+  $('#create-event').hide();
 });
 
 $('#promt-event-form').click(function() {
