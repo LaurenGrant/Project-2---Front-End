@@ -1,11 +1,12 @@
 'use strict';
 
 
-$('#section-1-show').click(function() {
+$('#login-to-profile').click(function() {
   $('#login').hide();
   $('#section-1').show();
   $('#register').hide()
   $('#intro-message').hide()
+  $('#enter-event').hide()
 });
 
 $('#logout-show').click(function() {
@@ -17,8 +18,7 @@ $('#logout-show').click(function() {
 
 $('#new-event').click(function() {
   $('#enter-location').show();
-  $('#create-location').show();
-  $('#create-or-update').hide()
+  $('#create-event').show();
   $('#option1').hide()
   $('#option2').hide()
 });
@@ -55,6 +55,8 @@ var api = {
     });
   },
 
+/*---- AJAX ---- */
+
   register: function register(credentials, callback) {
     this.ajax({
       method: 'POST',
@@ -86,8 +88,6 @@ var api = {
     }, callback);
   },
 
-
-//Authenticated api actions
   listEvents: function list(event, token, callback) {
     this.ajax({
       method: 'GET',
@@ -107,47 +107,25 @@ var api = {
         Authorization: 'Token token=' + token
       },
       contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({event}),
+      data: event,
       dataType: 'json',
     }, callback);
   },
 
-  createLocation: function create(location, token, callback) {
-    this.ajax({
-      method: 'POST',
-      url: this.url + '/locations/',
-      headers: {
-        Authorization: 'Token token=' + token
-      },
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({event}),
-      dataType: 'json',
-    }, callback);
-  },
 
-  editEvent: function (event, token, callback) {
-    this.ajax({
-      method: 'PATCH',
-      url: this.url + '/events/' + id,
-      headers: {
-        Authorization: 'Token token=' + token
-      },
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({}),
-      dataType: 'json'
-    }, callback);
-  },
-
-  // showEvent: function show(event, token, callback) {
+  // editEvent: function (event, token, callback) {
   //   this.ajax({
-  //     method: 'GET',
+  //     method: 'PATCH',
   //     url: this.url + '/events/' + id,
   //     headers: {
   //       Authorization: 'Token token=' + token
   //     },
+  //     contentType: 'application/json; charset=utf-8',
+  //     data: JSON.stringify({}),
   //     dataType: 'json'
   //   }, callback);
   // },
+
 
 };
 
@@ -180,6 +158,9 @@ $(function() {
     $('#result').val(JSON.stringify(data, null, 4));
   };
 
+/*---- Click Handlers for Register/Login/Logout ---- */
+
+
   $('#register').on('submit', function(e) {
     var credentials = wrap('credentials', form2object(this));
     api.register(credentials, callback);
@@ -211,22 +192,67 @@ $(function() {
     api.logout(id, token, callback);
   });
 
+/*---- Click Handlers for List/Create/Edit Events ---- */
+
 $('#list-events').on('submit', function(e) {
     var token = $('.token').val();
     e.preventDefault();
     api.listEvents(event, token, callback);
   });
 
-// $('#show-event').on('submit', function(e) {
-//     var eventData = {"event":
-//       {
-//         id: $('#show-eventId').val()
-//       }
-//     }
-//     var token = $('.token').val();
-//     e.preventDefault();
-    // api.showEvent(event, token, callback);
-  // });
+  $('#create-event').on('submit', function(e) {
+    var event = {
+      business_kind: $('#business_kind').val(),
+      name: $('#name').val(),
+      website: $('#website').val(),
+      phone_number: $('#phone_number').val(),
+      event_date: $('#event_date').val(),
+      group_size: $('#group_size').val(),
+      location_id: $('#location_id').val(),
+      user_id: $('#user_id').val()
+      }
+    var token = $('.token').val();
+    var id = event.id;
+    $('#event-store').val(event);
+    e.preventDefault();
+    api.createEvent(event, token, createEventCB);
+
+    });
+
+  $('#edit-event').on('submit', function(e) {
+    var event = {"event":
+      {
+        id: $('#event-id').val(),
+        business_kind: $('#edit_business_kind').val(),
+        name: $('#edit_name').val(),
+        website: $('#edit_website').val(),
+        phone_number: $('#edit_phone_number').val(),
+        event_date: $('#edit_event_date').val(),
+        group_size: $('#edit_group_size').val(),
+        location_id: $('#edit_location_id').val()
+      }
+    }
+    var token = $('.token').val();
+    $('#event-store').val(event);
+    e.preventDefault();
+    editEventCB();
+
+    $.ajax({
+      method: 'PATCH',
+      url: api.url + '/events/' + eventData.event.id,
+      headers: {
+        Authorization: 'Token token=' + token
+      },
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({eventData}),
+      dataType: 'json'
+    })
+    .done(function(){
+    console.log('updated this event!');
+    });
+  });
+
+/*---- Callback Functions ---- */
 
   var createEventCB = function createEventCB(err, data) {
     if(err) {
@@ -235,16 +261,6 @@ $('#list-events').on('submit', function(e) {
     }
 
     $('#eventId').val(data.event.id);
-    callback(null, data);
-  };
-
-  var createLocationCB = function createLocationCB(err, data) {
-    if(err) {
-      callback(err);
-      return;
-    }
-
-    $('#locationId').val(data.location.id);
     callback(null, data);
   };
 
@@ -262,82 +278,9 @@ $('#list-events').on('submit', function(e) {
       callback(err);
       return;
     }
+    console.log(data);
     $('#eventId').val(data.event.id);
     callback(null, data);
   };
-
-  // var showEventCB = function showEventCB(err, data) {
-  //   if(err) {
-  //     callback(err);
-  //     return;
-  //   }
-
-  //   $('#show-eventId').val(data.event.id);
-  //   callback(null, data);
-  // };
-
-  $('#create-event').on('submit', function(e) {
-    var event = {
-      business_kind: $('#business_kind').val(),
-      name: $('#name').val(),
-      website: $('#website').val(),
-      phone_number: $('#phone_number').val(),
-      event_date: $('#event_date').val(),
-      group_size: $('#group_size').val(),
-      location_id: $('#location_id').val(),
-      user_id: $('#user_id').val()
-      }
-    var token = $('.token').val();
-    var id = event.id;
-    e.preventDefault();
-    api.createEvent(event, token, createEventCB);
-
-    });
-
-  $('#create-location').on('submit', function(e) {
-    var location = {
-      city: $('#city').val(),
-      state: $('#state').val(),
-      region: $('#region').val()
-      }
-    var token = $('.token').val();
-    var id = location.id;
-    e.preventDefault();
-    api.createLocation(location, token, createLocationCB);
-
-    });
-
-  $('#edit-event').on('submit', function(e) {
-    var eventData = {"event":
-      {
-        id: $('#event-id').val(),
-        business_kind: $('#edit_business_kind').val(),
-        name: $('#edit_name').val(),
-        website: $('#edit_website').val(),
-        phone_number: $('#edit_phone_number').val(),
-        event_date: $('#edit_event_date').val(),
-        group_size: $('#edit_group_size').val(),
-        location_id: $('#edit_location_id').val()
-      }
-    }
-    var token = $('.token').val();
-    e.preventDefault();
-    editEventCB();
-
-    $.ajax({
-      method: 'PATCH',
-      url: api.url + '/events/' + eventData.event.id,
-      headers: {
-        Authorization: 'Token token=' + token
-      },
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify(eventData),
-      dataType: 'json'
-    })
-    .done(function(){
-    console.log('updated this event!');
-    });
-    // api.editEvent(event, token, editEventCB);
-  });
 
 });
